@@ -43,6 +43,24 @@ call mvnw clean package -DskipTests
 if %errorlevel% neq 0 exit /b %errorlevel%
 cd ..
 
+echo Building customer-service...
+cd customer-service
+call mvnw clean package -DskipTests
+if %errorlevel% neq 0 exit /b %errorlevel%
+cd ..
+
+echo Building account-service...
+cd account-service
+call mvnw clean package -DskipTests
+if %errorlevel% neq 0 exit /b %errorlevel%
+cd ..
+
+echo Building loan-service...
+cd loan-service
+call mvnw clean package -DskipTests
+if %errorlevel% neq 0 exit /b %errorlevel%
+cd ..
+
 echo All projects built successfully.
 goto menu
 
@@ -61,6 +79,21 @@ echo Starting demo-3: demo-3\target\discovery-server-1.0.jar
 start "demo-3" cmd /c "java -jar demo-3\target\discovery-server-1.0.jar & pause"
 goto menu
 
+:runcustomer
+echo Starting customer-service: customer-service\target\customer-service-1.0.jar
+start "customer-service" cmd /c "java -jar customer-service\target\customer-service-1.0.jar & pause"
+goto menu
+
+:runaccount
+echo Starting account-service: account-service\target\account-service-1.0.jar
+start "account-service" cmd /c "java -jar account-service\target\account-service-1.0.jar & pause"
+goto menu
+
+:runloan
+echo Starting loan-service: loan-service\target\loan-service-1.0.jar
+start "loan-service" cmd /c "java -jar loan-service\target\loan-service-1.0.jar & pause"
+goto menu
+
 :runall
 echo Starting demo-1: demo-1\target\demo1-1.0.jar
 start "demo-1" cmd /c "java -jar demo-1\target\demo1-1.0.jar & pause"
@@ -68,11 +101,17 @@ echo Starting demo-2: demo-2\target\demo2-1.0.jar
 start "demo-2" cmd /c "java -jar demo-2\target\demo2-1.0.jar & pause"
 echo Starting demo-3: demo-3\target\discovery-server-1.0.jar
 start "demo-3" cmd /c "java -jar demo-3\target\discovery-server-1.0.jar & pause"
+echo Starting customer-service: customer-service\target\customer-service-1.0.jar
+start "customer-service" cmd /c "java -jar customer-service\target\customer-service-1.0.jar & pause"
+echo Starting account-service: account-service\target\account-service-1.0.jar
+start "account-service" cmd /c "java -jar account-service\target\account-service-1.0.jar & pause"
+echo Starting loan-service: loan-service\target\loan-service-1.0.jar
+start "loan-service" cmd /c "java -jar loan-service\target\loan-service-1.0.jar & pause"
 goto menu
 
 :stopall
 echo Stopping all demo Java processes...
-for %%T in (demo-1 demo-2 demo-3) do (
+for %%T in (demo-1 demo-2 demo-3 customer-service account-service loan-service) do (
     for /f "tokens=2 delims==; " %%P in ('tasklist /v /fi "imagename eq java.exe" /fi "windowtitle eq %%T" /fo list ^| find "PID"') do (
         echo Killing %%T PID %%P
         taskkill /F /PID %%P

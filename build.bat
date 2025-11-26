@@ -72,7 +72,7 @@ goto menu
 
 :rundemo1
 echo Starting demo-1: demo-1\target\demo1-1.0.jar
-start "demo-1" cmd /c "java -jar demo-1\target\demo1-1.0.jar & pause"
+start "demo-1" cmd /c "java -jar demo-1\target\demo-1-1.0.jar & pause"
 goto menu
 
 :rundemo2

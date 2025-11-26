@@ -9,20 +9,26 @@ echo 1. Build all projects
 echo 2. Run demo-1
 echo 3. Run demo-2
 echo 4. Run demo-3
-echo 5. Run all demos
-echo 6. Stop all demos
-echo 7. Exit
+echo 5. Run customer-service
+echo 6. Run account-service
+echo 7. Run loan-service
+echo 8. Run all demos
+echo 9. Stop all demos
+echo 0. Exit
 echo =============================
-choice /c 1234567 /n /m "Select an option (1-7): "
+choice /c 1234567890 /n /m "Select an option (1-0): "
 set opt=%errorlevel%
 
 if %opt%==1 goto build
 if %opt%==2 goto rundemo1
 if %opt%==3 goto rundemo2
 if %opt%==4 goto rundemo3
-if %opt%==5 goto runall
-if %opt%==6 goto stopall
-if %opt%==7 goto end
+if %opt%==5 goto runcustomer
+if %opt%==6 goto runaccount
+if %opt%==7 goto runloan
+if %opt%==8 goto runall
+if %opt%==9 goto stopall
+if %opt%==10 goto end
 
 :build
 echo Building demo-1...
